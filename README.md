@@ -293,6 +293,7 @@ This bridges PX4 ↔ ROS2. You should see connection logs once PX4 SITL is runni
 ### Terminal 4 — Drone Agent (all ROS2 nodes)
 
 ```bash
+cd LLM-controlled-drone
 source /opt/ros/jazzy/setup.bash
 source install/setup.bash
 ros2 launch drone_agent drone_agent.launch.py
