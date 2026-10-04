@@ -191,7 +191,7 @@ colcon build --symlink-install
 
 ```bash
 source install/setup.bash
-python3 -c "import px4_msgs; print('px4_msgs loaded successfully!')"
+python3 -c 'import px4_msgs; print("px4_msgs ready")'
 
 ```
 
