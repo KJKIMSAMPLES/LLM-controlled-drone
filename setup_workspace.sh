@@ -28,7 +28,7 @@ sudo apt install -y \
 
 # Install Python dependencies
 echo "[2/4] Installing Python dependencies..."
-pip install ultralytics opencv-python google-genai
+pip install ultralytics opencv-python "numpy<2" --break-system-packages
 
 # Clone px4_msgs if not present
 echo "[3/4] Setting up px4_msgs..."
