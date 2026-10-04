@@ -136,11 +136,68 @@ This script:
 ### 3. Source the workspace
 
 ```bash
+cd ~/LLM-controlled-drone
 source /opt/ros/jazzy/setup.bash
+colcon build --symlink-install
+```
+*(소스 코드 양에 따라 수 분 정도 걸릴 수 있습니다.)*
+
+빌드가 정상적으로 끝나면 `install` 디렉터리가 생성됩니다.
+
+```bash
 source install/setup.bash
+
 ```
 
+앞서 발생했던 `px4_msgs` 에러가 해결되었는지 확인합니다:
+
+```bash
+python3 -c "import px4_msgs; print('px4_msgs ready!')"
+
+```
+
+출력에 `px4_msgs ready!`가 뜨면 정상적으로 준비가 완료된 것이므로, 이후 `ros2 launch drone_agent drone_agent.launch.py`를 실행
+
+
 > Add both lines to your `~/.bashrc` to avoid repeating them in every terminal.
+
+
+### 3.1. px4_msgs 설치
+
+#### 1. `src` 디렉터리에 `px4_msgs` 클론
+
+사용 중인 PX4 버전(일반적으로 `main` 또는 `release/1.14`, `release/1.15`)에 맞춰 가져옵니다.
+
+```bash
+cd ~/LLM-controlled-drone/src
+git clone https://github.com/PX4/px4_msgs.git
+
+```
+
+#### 2. 워크스페이스 전체 빌드
+
+이제 `px4_msgs`와 `drone_agent`가 모두 빌드 대상에 포함됩니다.
+
+```bash
+cd ~/LLM-controlled-drone
+source /opt/ros/jazzy/setup.bash
+colcon build --symlink-install
+
+```
+
+> **참고:** `px4_msgs` 빌드 시 IDL 코드 생성과 C++/Python 타입 바인딩 컴파일로 인해 수 분 정도 소요되며, 완료 시 `Summary: 2 packages finished`가 출력됩니다.
+
+#### 3. 환경 소싱 및 임포트 확인
+
+```bash
+source install/setup.bash
+python3 -c "import px4_msgs; print('px4_msgs loaded successfully!')"
+
+```
+
+출력에 `px4_msgs loaded successfully!`가 나오면 다시 `ros2 launch drone_agent drone_agent.launch.py`를 실행
+
+
 
 ### 4. Configure the LLM
 
